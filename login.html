@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n-title="login.title">로그인 | BTS Love Army</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body id="top" data-theme="dark">
+  <header class="header">
+    <nav class="nav">
+      <a href="index.html" class="logo">BTS Love Army</a>
+      <div class="header-controls">
+        <button class="lang-toggle" aria-label="언어 전환">EN</button>
+        <button class="theme-toggle" aria-label="테마 전환">☀️</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="auth-main">
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1 class="auth-title" data-i18n="login.title">로그인</h1>
+        <p class="auth-subtitle" data-i18n="login.subtitle">BTS Love Army 커뮤니티에 오신 것을 환영합니다</p>
+
+        <form class="auth-form" id="loginForm">
+          <div class="form-group">
+            <label for="email" data-i18n="login.email">이메일</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required 
+              data-i18n="login.email"
+              placeholder="이메일"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password" data-i18n="login.password">비밀번호</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              required
+              data-i18n="login.password"
+              placeholder="비밀번호"
+            >
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label>
+              <input type="checkbox" name="remember">
+              <span data-i18n="login.remember">로그인 상태 유지</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full" data-i18n="login.submit">로그인</button>
+
+          <div class="auth-links">
+            <a href="#" class="auth-link" data-i18n="login.forgot">비밀번호를 잊으셨나요?</a>
+          </div>
+
+          <div class="auth-divider">
+            <span data-i18n="login.noAccount">계정이 없으신가요?</span>
+          </div>
+
+          <a href="signup.html" class="btn btn-secondary btn-full" data-i18n="login.signup">회원가입</a>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="translations.js"></script>
+  <script src="i18n.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    // 로그인 폼 처리
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const submitBtn = this.querySelector('button[type="submit"]');
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = I18n.t('login.submit') + ' 중...';
+      
+      setTimeout(() => {
+        const result = Auth.login(email, password);
+        
+        if (result.success) {
+          alert(I18n.t('login.success'));
+          window.location.href = 'index.html';
+        } else {
+          alert(result.message);
+          submitBtn.disabled = false;
+          submitBtn.textContent = I18n.t('login.submit');
+        }
+      }, 500);
+    });
+
+    // 이미 로그인된 경우 리다이렉트
+    if (Auth.isAuthenticated()) {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
