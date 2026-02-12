@@ -36,25 +36,41 @@
 
   // ===== 모바일 메뉴 토글 =====
   var navToggle = document.querySelector('.nav-toggle');
-  var navLinks = document.querySelector('.nav-links');
+  var navLinksMobile = document.querySelector('.nav-links-mobile');
 
-  if (navToggle && navLinks) {
+  if (navToggle && navLinksMobile) {
     navToggle.addEventListener('click', function () {
-      navLinks.classList.toggle('is-open');
+      navLinksMobile.classList.toggle('is-open');
       navToggle.setAttribute('aria-label',
-        navLinks.classList.contains('is-open') ? '메뉴 닫기' : '메뉴 열기'
+        navLinksMobile.classList.contains('is-open') ? '메뉴 닫기' : '메뉴 열기'
       );
+      // 햄버거 아이콘 애니메이션
+      var spans = navToggle.querySelectorAll('span');
+      if (navLinksMobile.classList.contains('is-open')) {
+        spans[0].style.transform = 'rotate(45deg) translateY(8px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+      } else {
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = '';
+      }
     });
 
     // 메뉴 링크 클릭 시 부드럽게 스크롤 및 메뉴 닫기
-    navLinks.querySelectorAll('a').forEach(function (link) {
+    navLinksMobile.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function (e) {
-        e.preventDefault();
         var targetId = this.getAttribute('href');
-        if (targetId && targetId !== '#') {
+        if (targetId && targetId.startsWith('#')) {
+          e.preventDefault();
           smoothScrollTo(targetId);
         }
-        navLinks.classList.remove('is-open');
+        navLinksMobile.classList.remove('is-open');
+        // 햄버거 아이콘 리셋
+        var spans = navToggle.querySelectorAll('span');
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = '';
       });
     });
   }
