@@ -756,6 +756,41 @@ img {
   border-bottom-color: rgba(157, 78, 221, 0.2);
 }
 
+[data-theme="light"] .lang-segment {
+  background: rgba(240, 240, 250, 0.9);
+  border-color: rgba(157, 78, 221, 0.3);
+}
+
+[data-theme="light"] .lang-segment-btn {
+  color: rgba(45, 27, 78, 0.5);
+}
+
+[data-theme="light"] .lang-segment-btn.active {
+  background: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
+  color: white;
+}
+
+[data-theme="light"] .theme-toggle {
+  background: rgba(240, 240, 250, 0.9);
+  border-color: rgba(157, 78, 221, 0.3);
+  color: rgba(45, 27, 78, 0.7);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(230, 230, 240, 0.95);
+  border-color: rgba(157, 78, 221, 0.4);
+  color: rgba(45, 27, 78, 0.9);
+}
+
+[data-theme="light"] .btn-login.btn-user {
+  background: rgba(240, 240, 250, 0.9);
+  color: var(--purple-mid);
+}
+
+[data-theme="light"] .btn-login.btn-user:hover {
+  background: rgba(230, 230, 240, 0.95);
+}
+
 [data-theme="light"] .about-card,
 [data-theme="light"] .community-item,
 [data-theme="light"] .event-card {
