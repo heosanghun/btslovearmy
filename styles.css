@@ -35,6 +35,12 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.loaded {
+  opacity: 1;
 }
 
 a {
@@ -146,10 +152,27 @@ img {
   color: var(--text-muted);
   font-weight: 500;
   font-size: 0.95rem;
+  position: relative;
+  transition: color var(--transition);
 }
 
 .nav-links a:hover {
   color: var(--purple-pale);
+}
+
+.nav-links a.active {
+  color: var(--purple-light);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--purple-light);
+  border-radius: 2px;
 }
 
 /* ===== Hero ===== */
@@ -240,6 +263,11 @@ img {
   color: var(--text-muted);
   font-size: 1.5rem;
   animation: bounce 2s infinite;
+  transition: color var(--transition);
+}
+
+.hero-scroll:hover {
+  color: var(--purple-pale);
 }
 
 @keyframes bounce {
@@ -423,6 +451,24 @@ img {
 .join-form textarea:focus {
   outline: none;
   border-color: var(--purple-bright);
+  box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.1);
+}
+
+.join-form input.error,
+.join-form textarea.error {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.join-form input.error:focus,
+.join-form textarea.error:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+}
+
+.join-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .join-form button {
@@ -510,6 +556,40 @@ img {
   border-top: 1px dashed rgba(157, 78, 221, 0.25);
   font-size: 0.75rem;
   opacity: 0.9;
+}
+
+/* ===== 애니메이션 ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 섹션 애니메이션 지연 */
+.about-card:nth-child(1) { transition-delay: 0.1s; }
+.about-card:nth-child(2) { transition-delay: 0.2s; }
+.about-card:nth-child(3) { transition-delay: 0.3s; }
+
+.community-item:nth-child(1) { transition-delay: 0.1s; }
+.community-item:nth-child(2) { transition-delay: 0.2s; }
+.community-item:nth-child(3) { transition-delay: 0.3s; }
+
+.event-card:nth-child(1) { transition-delay: 0.1s; }
+.event-card:nth-child(2) { transition-delay: 0.2s; }
+.event-card:nth-child(3) { transition-delay: 0.3s; }
+
+/* 로고 호버 효과 */
+.logo {
+  transition: transform var(--transition);
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 /* ===== Responsive ===== */
