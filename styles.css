@@ -815,6 +815,27 @@ img {
 [data-theme="light"] .header {
   background: rgba(245, 240, 255, 0.95);
   border-bottom-color: rgba(157, 78, 221, 0.2);
+  backdrop-filter: blur(20px);
+}
+
+[data-theme="light"] .logo-text {
+  background: linear-gradient(135deg, #2d1b4e 0%, #5b3a8c 50%, #9d4edd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .nav-links a {
+  color: #2d1b4e;
+}
+
+[data-theme="light"] .nav-links a:hover,
+[data-theme="light"] .nav-links a.active {
+  color: #9d4edd;
+}
+
+[data-theme="light"] .nav-links a.active::after {
+  background: linear-gradient(90deg, #9d4edd 0%, #c77dff 100%);
 }
 
 [data-theme="light"] .lang-segment {
