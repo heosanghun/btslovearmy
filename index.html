@@ -14,8 +14,16 @@
     <nav class="nav">
       <a href="#" class="logo">BTS Love Army</a>
       <div class="header-controls">
-        <button class="lang-toggle" aria-label="언어 전환">EN</button>
-        <button class="theme-toggle" aria-label="테마 전환">☀️</button>
+        <div class="lang-segment">
+          <button class="lang-segment-btn" data-lang="ko" aria-label="한국어">KO</button>
+          <button class="lang-segment-btn" data-lang="en" aria-label="English">EN</button>
+        </div>
+        <button class="theme-toggle" aria-label="테마 전환">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="login.html" class="btn-login" data-i18n="nav.login">로그인</a>
       </div>
       <button class="nav-toggle" aria-label="메뉴 열기">
         <span></span><span></span><span></span>
@@ -26,7 +34,6 @@
         <li><a href="#events" data-i18n="nav.events">이벤트</a></li>
         <li><a href="#join" data-i18n="nav.join">참여하기</a></li>
         <li class="nav-auth" id="navAuth">
-          <a href="login.html" data-i18n="nav.login" id="loginLink">로그인</a>
           <a href="signup.html" data-i18n="nav.signup" id="signupLink" class="btn-nav">회원가입</a>
         </li>
       </ul>
@@ -166,19 +173,42 @@
   <script>
     // 로그인 상태에 따른 네비게이션 업데이트
     function updateAuthNav() {
+      const btnLogin = document.querySelector('.btn-login');
       const navAuth = document.getElementById('navAuth');
+      
       if (Auth.isAuthenticated()) {
         const user = Auth.getUser();
-        navAuth.innerHTML = `
-          <span class="user-info">${user.nickname}</span>
-          <a href="#" onclick="Auth.logout(); return false;" data-i18n="nav.logout">로그아웃</a>
-        `;
+        // 로그인 버튼을 사용자 정보로 변경
+        if (btnLogin) {
+          btnLogin.textContent = user.nickname;
+          btnLogin.href = '#';
+          btnLogin.classList.add('btn-user');
+          btnLogin.onclick = function(e) {
+            e.preventDefault();
+            // 프로필 메뉴 (추후 구현)
+          };
+        }
+        // 네비게이션에 로그아웃 버튼 추가
+        if (navAuth) {
+          navAuth.innerHTML = `
+            <a href="#" onclick="Auth.logout(); return false;" data-i18n="nav.logout" class="btn-nav">로그아웃</a>
+          `;
+        }
         I18n.updatePage();
       } else {
-        navAuth.innerHTML = `
-          <a href="login.html" data-i18n="nav.login" id="loginLink">로그인</a>
-          <a href="signup.html" data-i18n="nav.signup" id="signupLink" class="btn-nav">회원가입</a>
-        `;
+        // 로그인 버튼 표시
+        if (btnLogin) {
+          btnLogin.textContent = I18n.t('nav.login');
+          btnLogin.href = 'login.html';
+          btnLogin.classList.remove('btn-user');
+          btnLogin.onclick = null;
+        }
+        // 회원가입 버튼 표시
+        if (navAuth) {
+          navAuth.innerHTML = `
+            <a href="signup.html" data-i18n="nav.signup" id="signupLink" class="btn-nav">회원가입</a>
+          `;
+        }
         I18n.updatePage();
       }
     }

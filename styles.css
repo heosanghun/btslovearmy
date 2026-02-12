@@ -142,25 +142,113 @@ img {
   margin-right: 16px;
 }
 
-.lang-toggle,
-.theme-toggle {
-  background: rgba(157, 78, 221, 0.2);
-  border: 1px solid rgba(157, 78, 221, 0.3);
-  border-radius: var(--radius-sm);
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--purple-pale);
-  cursor: pointer;
-  transition: all var(--transition);
-  font-family: var(--font-body);
+/* 언어 세그먼트 컨트롤 */
+.lang-segment {
+  display: flex;
+  background: rgba(30, 30, 40, 0.8);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 0;
+  border: 1px solid rgba(157, 78, 221, 0.2);
 }
 
-.lang-toggle:hover,
+.lang-segment-btn {
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+  position: relative;
+  z-index: 1;
+}
+
+.lang-segment-btn.active {
+  background: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(157, 78, 221, 0.4);
+}
+
+.lang-segment-btn:not(.active):hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 테마 토글 버튼 */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 30, 40, 0.8);
+  border: 1px solid rgba(157, 78, 221, 0.2);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
 .theme-toggle:hover {
-  background: rgba(157, 78, 221, 0.3);
-  border-color: var(--purple-bright);
-  transform: scale(1.05);
+  background: rgba(40, 40, 50, 0.9);
+  border-color: rgba(157, 78, 221, 0.4);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+[data-theme="light"] .theme-toggle svg {
+  display: none;
+}
+
+[data-theme="light"] .theme-toggle::before {
+  content: '☀️';
+  font-size: 18px;
+}
+
+/* 로그인 버튼 */
+.btn-login {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: var(--font-body);
+  box-shadow: 0 2px 8px rgba(157, 78, 221, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-login:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(157, 78, 221, 0.4);
+  background: linear-gradient(135deg, #8b3dc8 0%, #b86de8 100%);
+}
+
+.btn-login.btn-user {
+  background: rgba(30, 30, 40, 0.8);
+  border: 1px solid rgba(157, 78, 221, 0.2);
+  box-shadow: none;
+  color: var(--purple-pale);
+}
+
+.btn-login.btn-user:hover {
+  background: rgba(40, 40, 50, 0.9);
+  border-color: rgba(157, 78, 221, 0.4);
+  transform: none;
 }
 
 .nav-auth {
@@ -177,18 +265,21 @@ img {
 }
 
 .btn-nav {
-  padding: 6px 16px;
-  background: rgba(157, 78, 221, 0.2);
+  padding: 8px 20px;
+  background: rgba(157, 78, 221, 0.15);
   border: 1px solid rgba(157, 78, 221, 0.3);
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
   font-weight: 600;
+  color: var(--purple-pale);
   transition: all var(--transition);
+  text-decoration: none;
 }
 
 .btn-nav:hover {
-  background: rgba(157, 78, 221, 0.3);
+  background: rgba(157, 78, 221, 0.25);
   border-color: var(--purple-bright);
+  color: var(--purple-light);
 }
 
 .nav-toggle {
@@ -694,12 +785,22 @@ img {
 @media (max-width: 768px) {
   .header-controls {
     margin-right: 8px;
+    gap: 8px;
   }
 
-  .lang-toggle,
-  .theme-toggle {
-    padding: 4px 8px;
+  .lang-segment-btn {
+    padding: 5px 12px;
     font-size: 0.75rem;
+  }
+
+  .theme-toggle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .btn-login {
+    padding: 6px 16px;
+    font-size: 0.85rem;
   }
 
   .nav-toggle {
@@ -735,6 +836,13 @@ img {
     gap: 16px;
     margin-left: 0;
     width: 100%;
+  }
+
+  .header-controls {
+    order: -1;
+    margin-bottom: 16px;
+    width: 100%;
+    justify-content: flex-start;
   }
 
   .form-row {

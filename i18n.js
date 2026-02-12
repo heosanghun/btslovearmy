@@ -23,7 +23,6 @@ const I18n = {
   updateThemeIcon: function() {
     const themeToggle = document.querySelector('.theme-toggle');
     if (themeToggle) {
-      themeToggle.textContent = this.currentTheme === 'dark' ? '☀️' : '🌙';
       themeToggle.setAttribute('aria-label', 
         this.currentTheme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'
       );
@@ -76,18 +75,27 @@ const I18n = {
     const savedTheme = localStorage.getItem('btslovearmy_theme') || 'dark';
     this.setTheme(savedTheme);
 
-    // 언어 전환 버튼 이벤트
-    document.querySelectorAll('.lang-toggle').forEach(btn => {
-      // 초기 버튼 텍스트 설정
-      btn.textContent = this.currentLang === 'ko' ? 'EN' : 'KO';
+    // 언어 세그먼트 컨트롤 이벤트
+    document.querySelectorAll('.lang-segment-btn').forEach(btn => {
+      const lang = btn.getAttribute('data-lang');
+      
+      // 초기 활성 상태 설정
+      if (lang === this.currentLang) {
+        btn.classList.add('active');
+      }
       
       btn.addEventListener('click', () => {
-        const newLang = this.currentLang === 'ko' ? 'en' : 'ko';
-        this.setLanguage(newLang);
-        // 모든 언어 전환 버튼 업데이트
-        document.querySelectorAll('.lang-toggle').forEach(b => {
-          b.textContent = newLang === 'ko' ? 'EN' : 'KO';
-        });
+        if (lang !== this.currentLang) {
+          this.setLanguage(lang);
+          // 모든 언어 버튼 업데이트
+          document.querySelectorAll('.lang-segment-btn').forEach(b => {
+            if (b.getAttribute('data-lang') === lang) {
+              b.classList.add('active');
+            } else {
+              b.classList.remove('active');
+            }
+          });
+        }
       });
     });
 
