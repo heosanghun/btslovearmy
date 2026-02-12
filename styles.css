@@ -804,6 +804,63 @@ img {
     radial-gradient(ellipse 60% 40% at 80% 80%, rgba(91, 58, 140, 0.1), transparent 45%);
 }
 
+/* 라이트 모드 히어로 텍스트 스타일 개선 */
+[data-theme="light"] .hero-title {
+  background: linear-gradient(135deg, #5b3a8c 0%, #7b4db8 30%, #9d4edd 60%, #c77dff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(157, 78, 221, 0.2));
+}
+
+[data-theme="light"] .hero-tag {
+  color: #7b4db8;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+[data-theme="light"] .hero-desc {
+  color: #4a2c6b;
+  font-weight: 500;
+}
+
+/* 라이트 모드 섹션 타이틀 개선 */
+[data-theme="light"] .section-title {
+  background: linear-gradient(135deg, #5b3a8c 0%, #7b4db8 50%, #9d4edd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 라이트 모드 카드 텍스트 개선 */
+[data-theme="light"] .about-card h3,
+[data-theme="light"] .community-item h3,
+[data-theme="light"] .event-card h3 {
+  color: #5b3a8c;
+  font-weight: 700;
+}
+
+[data-theme="light"] .about-card p,
+[data-theme="light"] .community-item p,
+[data-theme="light"] .event-card p {
+  color: #4a2c6b;
+}
+
+/* 라이트 모드 네비게이션 링크 개선 */
+[data-theme="light"] .nav-links a {
+  color: #5b3a8c;
+  font-weight: 600;
+}
+
+[data-theme="light"] .nav-links a:hover,
+[data-theme="light"] .nav-links a.active {
+  color: #9d4edd;
+}
+
+[data-theme="light"] .nav-links a.active::after {
+  background: #9d4edd;
+}
+
 [data-theme="light"] .join-form input,
 [data-theme="light"] .join-form textarea {
   background: rgba(255, 255, 255, 0.8);
