@@ -466,6 +466,52 @@ img {
   opacity: 0.8;
 }
 
+/* ===== Legal Disclaimer ===== */
+.legal-disclaimer {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(157, 78, 221, 0.2);
+  text-align: left;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.legal-disclaimer-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--purple-pale);
+  margin-bottom: 16px;
+}
+
+.legal-disclaimer-content {
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+.legal-disclaimer-content p {
+  margin-bottom: 12px;
+}
+
+.legal-disclaimer-content p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-disclaimer-content strong {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.legal-disclaimer-en {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(157, 78, 221, 0.25);
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .nav-toggle {
