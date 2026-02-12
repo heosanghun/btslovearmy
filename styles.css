@@ -884,6 +884,23 @@ img {
   border-top-color: rgba(157, 78, 221, 0.2);
 }
 
+[data-theme="light"] .footer-logo {
+  color: #2d1b4e;
+  font-weight: 900;
+}
+
+[data-theme="light"] .footer-text,
+[data-theme="light"] .footer-copy {
+  color: #3d2b5e;
+  font-weight: 500;
+  opacity: 1;
+}
+
+[data-theme="light"] .join-note {
+  color: #3d2b5e;
+  font-weight: 500;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .header-controls {
